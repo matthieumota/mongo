@@ -26,7 +26,10 @@ public class DemoApplication implements CommandLineRunner {
     public void run(String... args) {
 		// testWithoutRepositories();
 		// createMovie();
-		getYear();
+		// getYear();
+		// getMoviesBetween70and00();
+		// getMoviesFr();
+		getMoviesCrimes();
 
 		// System.out.println(movieAggregationRepository.getMovies());
 
@@ -48,7 +51,7 @@ public class DemoApplication implements CommandLineRunner {
 
 	public void createMovie() {
 		var movie = new Movie("Le Parrain");
-		movie.setReleased_at(1965);
+		movie.setReleasedAt(1965);
 		movie.setGenre( "Gangster");
 		movie.setSynopsis("Un film");
 		movie.setCountry("US");
@@ -74,7 +77,22 @@ public class DemoApplication implements CommandLineRunner {
 
 	public void getYear() {
 		var movie = movieRepository.findByTitle("Le Parrain");
-		System.out.println(movie.released_at);
+		System.out.println(movie.getReleasedAt());
+	}
+
+	public void getMoviesBetween70and00() {
+		var movies = movieRepository.findByReleasedAtBetweenOrderByTitleAsc(1970, 2000);
+		System.out.println(movies);
+	}
+
+	public void getMoviesFr() {
+		var movies = movieRepository.findByCountry("FR");
+		System.out.println(movies);
+	}
+
+	public void getMoviesCrimes() {
+		var movies = movieRepository.findByGenre("Crime");
+		System.out.println(movies);
 	}
 
 }

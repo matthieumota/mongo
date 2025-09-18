@@ -1,7 +1,7 @@
 package com.example.demo;
 
 import java.util.List;
-
+import org.springframework.data.mongodb.core.mapping.Field;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 public class Movie {
     public String id;
     public String title;
-    public int released_at;
+    @Field("released_at")
+    public int releasedAt;
     public String genre;
     public String synopsis;
     public String country;
