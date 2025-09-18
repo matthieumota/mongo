@@ -17,10 +17,10 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
     List<Movie> findByGenre(String genre);
 
     @Aggregation({
-        "{ $match: { country: 'FR' } }",
+        "{ $match: { country: ?0 } }",
         "{ $replaceWith: '$director' }"
     })
-    List<Director> findFrenchDirectors();
+    List<Director> findDirectors(String country);
 
     List<Movie> findByActorsFirstnameAndActorsName(String firstname, String name);
 

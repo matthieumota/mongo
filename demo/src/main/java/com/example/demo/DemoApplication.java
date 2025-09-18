@@ -103,7 +103,7 @@ public class DemoApplication implements CommandLineRunner {
 	}
 
 	public void getDirectorFr() {
-		var directors = movieRepository.findFrenchDirectors();
+		var directors = movieRepository.findDirectors("FR");
 		System.out.println(directors);
 	}
 
