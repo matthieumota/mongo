@@ -29,7 +29,14 @@ public class DemoApplication implements CommandLineRunner {
 		// getYear();
 		// getMoviesBetween70and00();
 		// getMoviesFr();
-		getMoviesCrimes();
+		// getMoviesCrimes();
+		// getDirectorFr();
+		// getMoviesMichaelKeaton();
+		// getMoviesMathieuKassovitz();
+		// countMovies();
+		// getActorBatman();
+		// countActorsByMovie();
+		// avgActorsByMovie();
 
 		// System.out.println(movieAggregationRepository.getMovies());
 
@@ -93,6 +100,41 @@ public class DemoApplication implements CommandLineRunner {
 	public void getMoviesCrimes() {
 		var movies = movieRepository.findByGenre("Crime");
 		System.out.println(movies);
+	}
+
+	public void getDirectorFr() {
+		var directors = movieRepository.findFrenchDirectors();
+		System.out.println(directors);
+	}
+
+	public void getMoviesMichaelKeaton() {
+		var movies = movieRepository.findByActorsFirstnameAndActorsName("Michael", "Keaton");
+		System.out.println(movies);
+	}
+
+	public void getMoviesMathieuKassovitz() {
+		var movies = movieRepository.findByDirectorFirstnameAndDirectorName("Mathieu", "Kassovitz");
+		System.out.println(movies);
+	}
+
+	public void countMovies() {
+		var count = movieRepository.countMoviesByCountry();
+		System.out.println(count);
+	}
+
+	public void getActorBatman() {
+		var movies = movieRepository.findActorByRole("Batman");
+		System.out.println(movies);
+	}
+
+	public void countActorsByMovie() {
+		var count = movieRepository.countActorsByMovie();
+		System.out.println(count);
+	}
+
+	public void avgActorsByMovie() {
+		var avg = movieRepository.avgActorsByMovie();
+		System.out.println(avg);
 	}
 
 }
