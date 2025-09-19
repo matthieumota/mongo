@@ -1,0 +1,47 @@
+services:
+  mongo1:
+    image: mongo
+    ports:
+      - 27017:27017
+    command: mongod --shardsvr --replSet fiorella --bind_ip_all --port 27017
+
+  mongo2:
+    image: mongo
+    ports:
+      - 27018:27017
+    command: mongod --shardsvr --replSet fiorella --bind_ip_all --port 27017
+
+  mongo3:
+    image: mongo
+    ports:
+      - 27019:27017
+    command: mongod --shardsvr --replSet fiorella --bind_ip_all --port 27017
+
+  mongo-config1:
+    image: mongo
+    ports:
+      - 27020:27017
+    command: mongod --configsvr --replSet config --bind_ip_all --port 27017
+
+  mongo4:
+    image: mongo
+    ports:
+      - 27021:27017
+    command: mongod --shardsvr --replSet marina --bind_ip_all --port 27017
+
+  mongo-router:
+    image: mongo
+    depends_on:
+      - mongo-config1
+    ports:
+      - 27022:27017
+    command: mongos --configdb config/mongo-config1:27017 --bind_ip_all --port 27017
+
+  mongo-setup:
+    profiles: [setup]
+    image: mongo
+    volumes:
+      - ./setup.sh:/setup.sh
+      - ./setup-config.sh:/setup-config.sh
+      - ./setup-shard.sh:/setup-shard.sh
+    entrypoint: bash -c
